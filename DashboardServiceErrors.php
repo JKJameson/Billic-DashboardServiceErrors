@@ -10,7 +10,7 @@ class DashboardServiceErrors {
 		if ($count>1)
 			$title = "$count $title";
 		$html = '';
-		$services = $db->q('SELECT `id`, `error` FROM `services` WHERE `error` != ? ORDER BY `nextduedate` DESC LIMIT 5', '');
+		$services = $db->q('SELECT `id`, `error` FROM `services` WHERE `error` != ? ORDER BY `nextduedate` DESC', '');
 		if (empty($services)) {
 			$html.= 'There are no services with errors.';
 		} else {
