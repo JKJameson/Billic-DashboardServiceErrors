@@ -6,10 +6,13 @@ class DashboardServiceErrors {
 	);
 	function dashboard_submodule() {
 		global $billic, $db;
+		$title = 'Service Errors';
+		if ($count>1)
+			$title = "$count $title";
 		$html = '';
 		$services = $db->q('SELECT `id`, `error` FROM `services` WHERE `error` != ? ORDER BY `nextduedate` DESC LIMIT 5', '');
 		if (empty($services)) {
-			$html.= '<br><div class="alert alert-success" role="alert">There are no services with errors.</div>';
+			$html.= 'There are no services with errors.';
 		} else {
 			$html.= '<table class="table table-striped">';
 			foreach ($services as $service) {
@@ -18,7 +21,7 @@ class DashboardServiceErrors {
 			$html.= '</table>';
 		}
 		return array(
-			'header' => 'Service Errors',
+			'header' => $title,
 			'html' => $html,
 		);
 	}
